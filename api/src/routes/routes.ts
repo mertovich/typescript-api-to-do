@@ -34,4 +34,12 @@ router.post("/todo/delete", urlBodyParser, (req: Request, res: Response) => {
 }
 );
 
+router.post("/todo/complete", urlBodyParser, (req: Request, res: Response) => {
+    ToDoManager.complete(req.body.id);
+    res.send("Completed");
+    res.status(200);
+    res.end();
+}
+);
+
 export default router;
