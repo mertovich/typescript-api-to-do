@@ -22,6 +22,18 @@ class ToDoManager {
         const newTodos = todos.filter((todo: Todo) => todo.id !== id);
         fs.writeFileSync("./src/data/todo.json", JSON.stringify(newTodos));
     }
+
+    public static complete(id: number): void {
+        const todos = ToDoManager.getAll();
+        const newTodos = todos.map((todo: Todo) => {
+            if (todo.id === id) {
+                todo.completed = !todo.completed;
+            }
+            return todo;
+        });
+        fs.writeFileSync("./src/data/todo.json", JSON.stringify(newTodos));
+    }
 }
+
 
 export default ToDoManager;
