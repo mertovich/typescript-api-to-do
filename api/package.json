@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@types/body-parser": "^1.19.2",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1"
