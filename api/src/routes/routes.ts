@@ -1,9 +1,29 @@
 import express, { Request, Response } from "express";
-const router = express.Router();
+import Todo from "../model/todo";
+import bodyParser from "body-parser";
+import ToDoManager from "../DataManager/ToDoManager";
 
-router.get("/", (req: Request, res: Response) => {
-    res.send("Hello World");
-    }
+const router = express.Router();
+const urlBodyParser = bodyParser.urlencoded();
+
+router.get("/todo", (req: Request, res: Response) => {
+    let todos = ToDoManager.getAll();
+    res.json(todos);
+    res.status(200);
+    res.end();
+}
+);
+
+router.post("/todo", urlBodyParser, (req: Request, res: Response) => {
+    const todo = new Todo();
+    todo.id = req.body.id;
+    todo.title = req.body.title;
+    todo.completed = req.body.completed;
+    todo.save();
+    res.send(todo);
+    res.status(200);
+    res.end();
+}
 );
 
 export default router;
