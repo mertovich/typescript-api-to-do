@@ -17,6 +17,11 @@ class ToDoManager {
         );
         return todos;
     }
+    public static delete(id: number): void {
+        const todos = ToDoManager.getAll();
+        const newTodos = todos.filter((todo: Todo) => todo.id !== id);
+        fs.writeFileSync("./src/data/todo.json", JSON.stringify(newTodos));
+    }
 }
 
 export default ToDoManager;
